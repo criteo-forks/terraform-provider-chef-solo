@@ -33,7 +33,6 @@ matrix:
   allow_failures:
   - go: tip
 
-
 deploy:
   provider: releases
   api_key:
