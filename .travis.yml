@@ -19,7 +19,6 @@ script:
 - export PRERELEASE=$(echo $VERSION | cut -d '-' -f 2)
 - make fmt
 - make test
-- make e2etest
 - make bin
 
 before_deploy:
