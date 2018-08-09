@@ -43,4 +43,3 @@ deploy:
   file_glob: true
   on:
     repo: Mwea/terraform-provider-chef-solo
-    tags: true
