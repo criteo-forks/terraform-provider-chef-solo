@@ -1,0 +1,48 @@
+dist: trusty
+sudo: required
+services:
+- docker
+language: go
+go:
+- 1.8.1
+
+install:
+# This script is used by the Travis build to install a cookie for
+# go.googlesource.com so rate limits are higher when using `go get` to fetch
+# packages that live there.
+# See: https://github.com/golang/go/issues/12933
+- bash scripts/gogetcookie.sh
+- go get github.com/kardianos/govendor
+
+script:
+- export VERSION=$(echo $TRAVIS_TAG | sed 's/^v//' )
+- export PRERELEASE=$(echo $VERSION | cut -d '-' -f 2)
+- sed -i "s/VersionPrerelease = \".*\"/VersionPrerelease = \"$PRERELEASE\"/" version/version.go
+- make fmt
+- make test
+- make e2etest
+- make bin
+
+before_deploy:
+- echo "Deploying $VERSION(-$PRERELEASE) to GitHub releases"
+- for d in $(find ./pkg -type d -maxdepth 1 -mindepth 1 | cut -d '/' -f3); do zip -j terraform-provider-chef-solo_v${VERSION}_${d}.zip ./pkg/${d}/terraform* ; done
+
+branches:
+  only:
+  - master
+matrix:
+  fast_finish: true
+  allow_failures:
+  - go: tip
+
+
+deploy:
+  provider: releases
+  api_key:
+    secure: DrKYYorPRzUxNKA8bsTFS2KyANY1e1Xbv6MgjByvMddf46fjlhueo7i3LySlCijQCMvGLfn4C6zvfyY0uYIQsAnP9RHdDzbEZD00d+TaHydXGUdxzNQMTEkuoyGZ7kfBmS8QQ9GMOYfP3baAVq5E2m2tvoOFtvwxvNYyDOIwZvcbTMGtffvbhin4AWOC9p0VT+19m+Gl9/7upVygrGSzCYmwMTMnC32C1V+HA+vNpXuZ+9TaXsBDNxsz3g/ieSiGbNK27rrDt/HEcoeCYf84jteOGpvfA/KOZnNPpZZ9L0/eml77Hj2G1IKHo5rRSJaVDQRnF3F2loyJBnc5PbTeidVpfeLLJj2zgDo6eziPsBwPTnMJB5RTjA1h9MGP6PvqVsbDRHaQDv1rm2WF334pi1BuYJl2DkmgINfeoi/sBlUwpIgRKX39HGr56OGwqq3+8tKHg6FT4Pqr35YWepAY9N8MtK9GETYuofLZVHSCl1k255Jtb601UiCrAyICWQpcS63iA5zLlpK0IgL4uv42KGj0WF4h+j4XxUr943vvKX22NJH2IXRBRm0KwHKEkBKJq8Q+UxYJ06I+eYliDWAnxhSMrEl34Gxq7Okp/+jQFUclRtotbhC4CXIMcpye71WKT77fXLK8YkGeaPuAOWYCVNB3G5nmJ6IwST0AE9Y+7RY=
+  file: terraform-*.zip
+  skip_cleanup: true
+  file_glob: true
+  on:
+    repo: Mwea/terraform-provider-chef-solo
+    tags: true
