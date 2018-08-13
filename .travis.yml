@@ -41,4 +41,4 @@ deploy:
   skip_cleanup: true
   file_glob: true
   on:
-    repo: Mwea/terraform-provider-chef-solo
+    repo: Mwea/terraform-provider-chefsolo

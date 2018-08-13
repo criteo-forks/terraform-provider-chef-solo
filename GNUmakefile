@@ -1,6 +1,6 @@
 TEST?=$$(go list ./... |grep -v 'vendor')
 GOFMT_FILES?=$$(find . -name '*.go' |grep -v vendor)
-PKG_NAME=template
+PKG_NAME=chefsolo
 
 default: build
 
@@ -9,7 +9,7 @@ build: fmtcheck
 
 
 bin: fmtcheck
-	sh -c "'$(CURDIR)/scripts/build.sh'"
+	sh -c "'$(CURDIR)/scripts/build.sh' $$VERSION"
 
 test: fmtcheck
 	go test -i $(TEST) || exit 1

@@ -1,4 +1,4 @@
-package chef_solo_data
+package chefsolo
 
 import (
 	"testing"
@@ -8,7 +8,7 @@ import (
 )
 
 var testProviders = map[string]terraform.ResourceProvider{
-	"template": Provider(),
+	"chefsolo": Provider(),
 }
 
 func TestProvider(t *testing.T) {

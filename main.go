@@ -1,11 +1,11 @@
 package main
 
 import (
-	"github.com/Mwea/terraform-provider-chef-solo/chef-solo-data"
+	"github.com/Mwea/terraform-provider-chefsolo/chefsolo"
 	"github.com/hashicorp/terraform/plugin"
 )
 
 func main() {
 	plugin.Serve(&plugin.ServeOpts{
-		ProviderFunc: chef_solo_data.Provider})
+		ProviderFunc: chefsolo.Provider})
 }

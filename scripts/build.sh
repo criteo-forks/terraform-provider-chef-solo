@@ -4,6 +4,7 @@
 
 # Get the parent directory of where this script is.
 SOURCE="${BASH_SOURCE[0]}"
+VERSION=$1
 while [ -h "$SOURCE" ] ; do SOURCE="$(readlink "$SOURCE")"; done
 DIR="$( cd -P "$( dirname "$SOURCE" )/.." && pwd )"
 
@@ -54,7 +55,7 @@ gox \
     -arch="${XC_ARCH}" \
     -osarch="${XC_EXCLUDE_OSARCH}" \
     -ldflags "${LD_FLAGS}" \
-    -output "pkg/{{.OS}}_{{.Arch}}/${PWD##*/}" \
+    -output "pkg/{{.OS}}_{{.Arch}}/${PWD##*/}_${VERSION}" \
     .
 
 # Move all the compiled things to the $GOPATH/bin

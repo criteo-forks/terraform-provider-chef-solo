@@ -1,4 +1,4 @@
-package chef_solo_data
+package chefsolo
 
 import (
 	"github.com/hashicorp/terraform/helper/schema"
@@ -8,11 +8,11 @@ import (
 func Provider() terraform.ResourceProvider {
 	return &schema.Provider{
 		DataSourcesMap: map[string]*schema.Resource{
-			"template_chef_solo": dataSourceChefSoloFile(),
+			"chefsolo": dataSourceChefSoloFile(),
 		},
 		ResourcesMap: map[string]*schema.Resource{
-			"template_chef_solo": schema.DataSourceResourceShim(
-				"template_chef_solo",
+			"chefsolo": schema.DataSourceResourceShim(
+				"chefsolo",
 				dataSourceChefSoloFile(),
 			),
 		},

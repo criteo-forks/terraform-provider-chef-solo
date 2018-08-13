@@ -1,4 +1,4 @@
-package chef_solo_data
+package chefsolo
 
 import (
 	"crypto/sha256"
@@ -21,12 +21,12 @@ func dataSourceChefSoloFile() *schema.Resource {
 			"default_attributes": {
 				Type:        schema.TypeString,
 				Optional:    true,
-				Description: "Contents of the chef-solo-data",
+				Description: "Contents of the chefsolo",
 			},
 			"automatic_attributes": {
 				Type:        schema.TypeString,
 				Optional:    true,
-				Description: "Contents of the chef-solo-data",
+				Description: "Contents of the chefsolo",
 			},
 			"vars": {
 				Type:         schema.TypeMap,
@@ -175,7 +175,7 @@ func injectChefSoloVars(d *schema.ResourceData, vars map[string]interface{}) (ma
 	return vars, nil
 }
 
-// execute parses and executes a chef-solo-data using vars.
+// execute parses and executes a chefsolo using vars.
 func executeChefSolo(s string, vars map[string]interface{}) (string, error) {
 	root, err := hil.Parse(s)
 	if err != nil {

@@ -1,4 +1,4 @@
-package chef_solo_data
+package chefsolo
 
 import (
 	"fmt"
@@ -158,7 +158,7 @@ func testTemplateChefSoloConfig(autoAttrs string, defaultAttrs string, runList [
 		run_list_attr, _ := json.Marshal(runList)
 
 		data = fmt.Sprintf(
-			`data "template_chef_solo" "t0" {
+			`data "chefsolo" "t0" {
 					node_id = "%s"
 					automatic_attributes = "%s" 
 					default_attributes = "%s"
@@ -170,7 +170,7 @@ func testTemplateChefSoloConfig(autoAttrs string, defaultAttrs string, runList [
 			string(run_list_attr[:]), vars)
 	} else {
 		data = fmt.Sprintf(
-			`data "template_chef_solo" "t0" {
+			`data "chefsolo" "t0" {
 			node_id = "%s"
 			automatic_attributes = "%s" 
 			default_attributes = "%s"
@@ -185,18 +185,18 @@ func testTemplateChefSoloConfig(autoAttrs string, defaultAttrs string, runList [
 	return data + `
 
 		output "dna" {
-				value = "${data.template_chef_solo.t0.dna}"
+				value = "${data.chefsolo.t0.dna}"
 		}
 		output "node" {
-				value = "${data.template_chef_solo.t0.node}"
+				value = "${data.chefsolo.t0.node}"
 		}
 		output "environment" {
-				value = "${data.template_chef_solo.t0.environment}"
+				value = "${data.chefsolo.t0.environment}"
 		}
 		output "node_id" {
-				value = "${data.template_chef_solo.t0.node_id}"
+				value = "${data.chefsolo.t0.node_id}"
 		}
 		output "named_run_list" {
-				value = "${data.template_chef_solo.t0.named_run_list}"
+				value = "${data.chefsolo.t0.named_run_list}"
 		}`
 }
