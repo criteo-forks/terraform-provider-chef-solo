@@ -1,5 +1,5 @@
-# github.com/Mwea/terraform-provider-chefsolo v0.0.0-20180827140845-ab58e8d6d6f8
-github.com/Mwea/terraform-provider-chefsolo/chefsolo
+# github.com/criteo-forks/terraform-provider-chefsolo v0.0.0-20180827140845-ab58e8d6d6f8
+github.com/criteo-forks/terraform-provider-chefsolo/chefsolo
 # github.com/apparentlymart/go-cidr v0.0.0-20170418151526-7e4b007599d4
 github.com/apparentlymart/go-cidr/cidr
 # github.com/aws/aws-sdk-go v1.8.34

@@ -4,7 +4,7 @@ Terraform Chef Solo Provider v 0.1
 Terraform ChefSolo Provider is a data-source designed to easily helps you
 generating node files. It is a basic extension of the data-source "template_file".
 
-This plugin is supposed to be used with the [Terraform ChefSolo provisioner](https://github.com/Mwea/terraform-provisioner-chefsolo)
+This plugin is supposed to be used with the [Terraform ChefSolo provisioner](https://github.com/criteo-forks/terraform-provisioner-chefsolo)
 
 ## Example of usage : 
 
